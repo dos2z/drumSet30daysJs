@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    padding-top: 10px;
+    color: white;
+    background-color: rgb(26, 26, 26);
+ 
+}
+h1, h2, p {
+    text-align: center;
+}
+h1:active, h2:active, p:active{
+    transform: rotate(5deg);
+
+}
+
+h1, h2{
+    
+    text-shadow: 0 10px 10px gold;
+    & a{
+        color: white;
+        text-decoration: none;
+    }
+}
+
+p{
+    margin: 20px;
+    & a{
+        color: goldenrod;
+    }
+}
+
+.drumSet {
+    background-color: black;
+   color: white;
+    width: 50%;
+    min-width: 300px;
+    max-width: 350px;
+    position: absolute;
+    top: 30vh;
+    right: 0;
+    left: 0;
+    margin: auto;
+    border: solid;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: auto;
+    row-gap: 20px;
+    justify-items: center;
+    box-shadow: 0 0 10px gold;
+
+    & div {
+        border: 1px solid;
+        width: 33%;
+        max-width: 80px;
+        min-width: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.09s;
+        & span {
+            color: goldenrod;
+        }
+    }
+    & div:active {
+        cursor: pointer;
+    }
+
+    .playing {
+        border: 1px solid gold;
+        box-shadow: 0 0 10px gold;
+        transform: scale(1.1);
+        transform: rotate(3deg);
+    }
+}

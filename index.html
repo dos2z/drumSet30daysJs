@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h1>Drum Set</h1>
+        <h2><a target="_blank" href="https://javascript30.com/">30 days vanilla JavaScript</a></h2>
+        <p><a target="_blank" href="https://github.com/wesbos">By Wes Bos: https://github.com/wesbos</a></p> 
+        
+        <div class="drumSet">
+            <div data-key="81" class="key">
+                <h3>Q</h3> <span class="soundName">kik</span>
+            </div>
+            <div data-key="87" class="key">
+                <h3>W</h3> <span class="soundName">clap</span>
+            </div>
+            <div data-key="69" class="key">
+                <h3>E</h3> <span class="soundName">ride</span>
+            </div>
+            <div data-key="65" class="key">
+                <h3>A</h3> <span class="soundName">hihat</span>
+            </div>
+            <div data-key="83" class="key">
+                <h3>S</h3> <span class="soundName">tom</span>
+            </div>
+            <div data-key="68" class="key">
+                <h3>D</h3> <span class="soundName">openhat</span>
+            </div>
+            <div data-key="88" class="key">
+                <h3>X</h3> <span class="soundName">tink</span>
+            </div>
+            <div data-key="67" class="key">
+                <h3>C</h3> <span class="soundName">snare</span>
+            </div>
+            <div data-key="32" class="key">
+                <h3>Space</h3> <span class="soundName">boom</span>
+            </div>
+        </div>
+
+
+        <audio data-key="81" src="./assets/audio/kick.wav"></audio>
+        <audio data-key="87" src="./assets/audio/clap.wav"></audio>
+        <audio data-key="69" src="./assets/audio/ride.wav"></audio>
+        <audio data-key="65" src="./assets/audio/hihat.wav"></audio>
+        <audio data-key="83" src="./assets/audio/tom.wav"></audio>
+        <audio data-key="68" src="./assets/audio/openhat.wav"></audio>
+        <audio data-key="88" src="./assets/audio/tink.wav"></audio>
+        <audio data-key="67" src="./assets/audio/snare.wav"></audio>
+        <audio data-key="32" src="./assets/audio/boom.wav"></audio>
+    </main>
+
+    <script>
+        const keys = document.querySelectorAll(".key");
+        const drumSet = document.querySelector(".drumSet")
+
+        const removeTransition = (e) => {
+            e.target.classList.remove("playing")
+        }
+
+        keys.forEach(key => {
+            key.addEventListener("transitionend", removeTransition)
+        })
+
+        function playAudio(key) {
+            const audio = document.querySelector(`audio[data-key="${key}"]`)
+            const keyPress = document.querySelector(`.key[data-key="${key}"]`)
+            if (!audio) return
+            keyPress.classList.add("playing")
+            audio.currentTime = 0
+            audio.play()
+        }
+
+        const playDrumClick = (e) => {
+            const div = drumSet.querySelector("div")
+            let dataKey
+            if (e.target.classList.contains("key")) {
+                dataKey = e.target.getAttribute("data-key")
+            } else if (e.target.parentElement.classList.contains("key")) {
+                dataKey = e.target.parentElement.getAttribute("data-key")
+            };
+            playAudio(dataKey)
+        }
+
+        const playDrumKeydown = (e) => {
+            let dataKey = e.keyCode
+            playAudio(dataKey)
+        }
+        drumSet.addEventListener("click", playDrumClick)
+
+        window.addEventListener("keydown", playDrumKeydown)
+
+    </script>
+</body>
+
+</html>
